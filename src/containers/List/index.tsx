@@ -24,7 +24,7 @@ const List: React.FC<ReturnType<typeof mapStateToProps> & ResolveThunks<typeof m
     <div>
       <Button onClick={props.fetchList}>Fetch</Button>
       <Button onClick={props.deleteList}>Delete</Button>
-      {configureItems(props.items).slice()}
+      {configureItems(props.items)}
     </div>);
 });
 

@@ -37,12 +37,10 @@ export class HttpService {
   }
 
   private makeRequest<T = any>(config: AxiosRequestConfig): Promise<AxiosResponse<T>> {
-    return new Promise<AxiosResponse<T>>((resolve, reject) => {
-      const source = axios.CancelToken.source();
-      const cancelToken = source.token;
+    const source = axios.CancelToken.source();
+    const cancelToken = source.token;
 
-      return resolve(axios.request({...config, cancelToken}));
-    });
+    return axios.request({...config, cancelToken});
   }
 }
 
