@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux';
-import wordReducer from './word';
+import spinnerReducer from './spinner';
+import listReducer from 'reducers/list';
 
 export default combineReducers({
-  word: wordReducer,
+  spinner: spinnerReducer,
+  list: listReducer,
 })
