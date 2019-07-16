@@ -1,4 +1,4 @@
-import React, {Suspense, StrictMode, lazy} from 'react';
+import React, {Suspense, lazy} from 'react';
 import thunk from 'redux-thunk';
 import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux';
@@ -10,35 +10,33 @@ import DefaultLayout from 'layouts/DefaultLayout';
 import './App.scss';
 
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
-const SpinnerController = lazy(() => import('containers/SpinnerController'));
-const List = lazy(() => import('containers/List'));
+
+const Home = lazy(() => import('containers/Home'));
+const LearningDashboard = lazy(() => import('containers/LearningDashboard'));
 
 const App: React.FC = () => {
   return (
-    <StrictMode>
-      <Provider store={store}>
-        <Router>
-          <Suspense fallback={<Spinner/>}>
-            <Switch>
-              <Route exact path={'/'}>
-                <DefaultLayout>
-                  <SpinnerController/>
-                  <Spinner/>
-                </DefaultLayout>
-              </Route>
-              <Route exact path={'/list'}>
-                <DefaultLayout>
-                  <List/>
-                </DefaultLayout>
-              </Route>
-              <Route path={'*'}>
-                <Redirect to={'/'}/>
-              </Route>
-            </Switch>
-          </Suspense>
-        </Router>
-      </Provider>
-    </StrictMode>
+    <Provider store={store}>
+      <Router>
+        <Suspense fallback={<Spinner/>}>
+          <Switch>
+            <Route exact path={'/'}>
+              <DefaultLayout>
+                <Home/>
+              </DefaultLayout>
+            </Route>
+            <Route exact path={'/learn'}>
+              <DefaultLayout>
+                <LearningDashboard/>
+              </DefaultLayout>
+            </Route>
+            <Route path={'*'}>
+              <Redirect to={'/'}/>
+            </Route>
+          </Switch>
+        </Suspense>
+      </Router>
+    </Provider>
   );
 };
 

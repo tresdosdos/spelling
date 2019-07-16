@@ -1,0 +1,23 @@
+@import '~css/color';
+@import '~css/width';
+
+.s-task-panel {
+  align-items: center;
+  background-color: $primary-color;
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  width: 100%;
+
+  &-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: $mobile-l) {
+  .s-task-panel {
+    background-color: $light-color;
+  }
+}

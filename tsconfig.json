@@ -25,7 +25,9 @@
       "containers/*": ["containers/*"],
       "reducers/*": ["reducers/*"],
       "layouts/*": ["layouts/*"],
-      "services/*": ["services/*"]
+      "services/*": ["services/*"],
+      "css/*": ["css/*"],
+      "assets/*": ["assets/*"]
     }
   },
   "include": [

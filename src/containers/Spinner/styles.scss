@@ -1,5 +1,13 @@
-$color-blue: blue;
+.s-spinner {
+  animation: spinner-run 10s linear infinite;
+  position: absolute;
+}
 
-h1 {
-  color: $color-blue;
+@keyframes spinner-run {
+  from {
+    left: 0;
+  }
+  to {
+    left: 80%;
+  }
 }

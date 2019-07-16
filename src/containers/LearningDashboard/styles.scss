@@ -1,0 +1,14 @@
+@import '~css/width';
+
+.s-learning-container {
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 70%;
+}
+
+@media screen and (max-width: $mobile-l) {
+  .s-learning-container {
+    padding: 0;
+    width: 100%;
+  }
+}

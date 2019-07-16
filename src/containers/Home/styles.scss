@@ -1,0 +1,50 @@
+@import '~css/color';
+@import '~css/image';
+@import '~css/width';
+
+.s-home {
+  align-items: center;
+  background-image: $home-background;
+  background-size: cover;
+  background-position: center 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+
+  &-label {
+    color: $primary-color;
+  }
+}
+
+
+@media screen and (max-width: $tablet) {
+  .s-home {
+    background-position: 20% 10%;
+
+    &-label {
+      font-size: 28/16*1rem;
+    }
+  }
+}
+
+@media screen and (max-width: $mobile-l) {
+  .s-home {
+    background-position: 10% 20%;
+
+    &-label {
+      font-size: 18/16*1rem;
+    }
+  }
+}
+
+@media screen and (max-width: $mobile-s) {
+  .s-home {
+    background-position: 20% 30%;
+
+    &-label {
+      font-size: 14/16*1rem;
+    }
+  }
+}

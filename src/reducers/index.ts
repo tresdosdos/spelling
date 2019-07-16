@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
 import spinnerReducer from './spinner';
-import listReducer from 'reducers/list';
+import taskReducer from './task';
 
 export default combineReducers({
   spinner: spinnerReducer,
-  list: listReducer,
+  task: taskReducer,
 })

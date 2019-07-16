@@ -1,0 +1,28 @@
+@import '~css/width';
+@import '~css/color';
+
+.s-layout {
+  height: 100vh;
+  margin: 0 auto;
+  width: 100%;
+
+  .s-navbar {
+    display: flex;
+    justify-content: space-between;
+
+    .s-nav {
+      margin-right: 0 !important;
+    }
+  }
+
+  &-content {
+    flex-direction: column;
+    height: calc(100vh - 56px);
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .s-layout {
+    width: 100%;
+  }
+}
