@@ -1,11 +1,6 @@
-import {
-  IPushTaskAction,
-  ISetCurrentTaskAction,
-  ISetDefaultTaskAction,
-  ISetPendingTaskAction,
-  ISetTaskAction
-} from './interfaces';
 import {ITask, TaskActionTypes} from 'reducers/task/interfaces';
+import {IPushTaskAction, ISetStatusAction, ISetTaskAction} from './interfaces';
+import {ITaskStatus, TaskButtonStatus} from '../../interfaces';
 
 export const setTasks = (tasks: ITask[]): ISetTaskAction => ({
   type: TaskActionTypes.SET_TASKS,
@@ -17,16 +12,20 @@ export const pushTask = (task: ITask): IPushTaskAction => ({
   payload: task,
 });
 
-export const setPending = (id: number): ISetPendingTaskAction => ({
-  type: TaskActionTypes.SET_PENDING,
-  payload: id,
+export const setTaskStatus = (task: ITaskStatus): ISetStatusAction => ({
+  type: TaskActionTypes.SET_STATUS,
+  payload: task,
 });
 
-export const setCurrent = (id: number): ISetCurrentTaskAction => ({
-  type: TaskActionTypes.SET_CURRENT,
-  payload: id,
-});
+export const setDefault = (tasks: ITask[]): ISetStatusAction => {
+  const defaultTask = tasks[0];
 
-export const setDefault = (): ISetDefaultTaskAction => ({
-  type: TaskActionTypes.SET_DEFAULT,
-});
+  if (defaultTask) {
+    defaultTask.status = TaskButtonStatus.CURRENT;
+  }
+
+  return {
+    type: TaskActionTypes.SET_STATUS,
+    payload: defaultTask,
+  }
+};

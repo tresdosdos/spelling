@@ -13,7 +13,7 @@ const Spinner: React.FC<ReturnType<typeof mapStateToProps>> = React.memo((props)
     return null;
   }
 
-  return (<BSSpinner animation={'border'} variant={'secondary'} />);
+  return (<BSSpinner animation={'border'} variant={'secondary'} className={'s-spinner'} />);
 });
 
 export default connect(mapStateToProps)(Spinner);

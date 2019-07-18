@@ -1,0 +1,14 @@
+.s-task {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px;
+
+  &-play {
+    cursor: pointer;
+  }
+
+  &-button {
+    margin-top: 24px;
+  }
+}

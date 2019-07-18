@@ -7,6 +7,16 @@ export class WordService {
     return this.makeRequest();
   }
 
+  public static getWordSet(): Promise<string[]> {
+    return Promise.all<string>(Array(10).fill(null).map(async () => {
+      return await this.getWord();
+    }))
+  }
+
+  public static compareWords(incomingWord: string, initialWord: string): boolean {
+    return incomingWord === initialWord;
+  }
+
   private static async makeRequest(): Promise<string> {
     const res = await HttpService.get<IWord>('https://wordsapiv1.p.rapidapi.com/words/?random=true', {
       headers: {

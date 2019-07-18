@@ -1,13 +1,14 @@
 import React from 'react';
 import {connect, ResolveThunks} from 'react-redux';
-import {setCurrent, setDefault, setPending} from 'actions/task';
+import {setDefault, setTaskStatus} from 'actions/task';
+import {resetStatus} from 'actions/answer';
 import TaskPanelArrow from 'components/TaskPanelArrow';
 import TaskButton from 'components/TaskButton';
 import {TaskPanelArrowType} from 'components/TaskPanelArrow/interfaces';
 import {TaskPanelService} from 'services/task-panel';
+import {ITask} from 'reducers/task/interfaces';
 import {IRootState, ITaskButton, TaskButtonStatus} from '../../interfaces';
 import './styles.scss';
-import {ITask} from 'reducers/task/interfaces';
 
 function configureTaskButtons(buttons: ITaskButton[]): JSX.Element[] {
   return buttons.map((button) => {
@@ -17,25 +18,18 @@ function configureTaskButtons(buttons: ITaskButton[]): JSX.Element[] {
 
 const mapStateToProps = (state: IRootState) => ({
   buttons: state.task.tasks,
+  currentTask: TaskPanelService.getCurrentTask(state.task.tasks),
 });
 
 const mapDispatchToProps = {
-  setCurrent,
-  setPending,
   setDefault,
+  setTaskStatus,
+  resetStatus,
 };
 
 class TaskPanel extends React.Component<ReturnType<typeof mapStateToProps> & ResolveThunks<typeof mapDispatchToProps>> {
-  public componentDidMount(): void {
-    const currentTask = this.currentTask;
-
-    if (!currentTask) {
-      this.props.setDefault();
-    }
-  }
-
   private goPrevTask = (): void => {
-    const currentTask = this.currentTask;
+    const currentTask = this.props.currentTask;
 
     if (!currentTask) {
       return;
@@ -43,16 +37,11 @@ class TaskPanel extends React.Component<ReturnType<typeof mapStateToProps> & Res
 
     const prevTaskId = TaskPanelService.getPrev(this.props.buttons, currentTask);
 
-    if (!prevTaskId) {
-      return;
-    }
-
-    this.props.setPending(currentTask.id);
-    this.props.setCurrent(prevTaskId);
+    this.onTaskChange(currentTask, prevTaskId);
   }
 
   private goNextTask = (): void => {
-    const currentTask = this.currentTask;
+    const currentTask = this.props.currentTask;
 
     if (!currentTask) {
       return;
@@ -60,16 +49,17 @@ class TaskPanel extends React.Component<ReturnType<typeof mapStateToProps> & Res
 
     const nextTaskId = TaskPanelService.getNext(this.props.buttons, currentTask);
 
-    if (!nextTaskId) {
+    this.onTaskChange(currentTask, nextTaskId);
+  }
+
+  private onTaskChange = (currTask: ITask, task: ITaskButton | undefined): void => {
+    if (!task) {
       return;
     }
 
-    this.props.setPending(currentTask.id);
-    this.props.setCurrent(nextTaskId);
-  }
-
-  private get currentTask(): ITask | undefined {
-    return this.props.buttons.find(button => button.status === TaskButtonStatus.CURRENT);
+    this.props.setTaskStatus({...currTask, status: TaskButtonStatus.PENDING});
+    this.props.setTaskStatus({...task, status: TaskButtonStatus.CURRENT});
+    this.props.resetStatus();
   }
 
   public render() {

@@ -11,7 +11,5 @@ export interface ITaskState {
 export enum TaskActionTypes {
   SET_TASKS = 'SET_TASKS',
   PUSH_TASK = 'PUSH_TASK',
-  SET_CURRENT = 'SET_CURRENT',
-  SET_PENDING = 'SET_PENDING',
-  SET_DEFAULT = 'SET_DEFAULT',
+  SET_STATUS = 'SET_STATUS',
 }

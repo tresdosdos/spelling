@@ -1,13 +1,9 @@
 .s-spinner {
-  animation: spinner-run 10s linear infinite;
+  width: 24px;
+  height: 24px;
   position: absolute;
-}
-
-@keyframes spinner-run {
-  from {
-    left: 0;
-  }
-  to {
-    left: 80%;
-  }
+  left: 50%;
+  top: 50%;
+  margin-left: -12px;
+  margin-top: -12px;
 }
